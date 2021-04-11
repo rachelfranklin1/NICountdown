@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { useCountdown } from "../hooks/useCountdown";
-import "@fontsource/open-sans";
+import "@fontsource/comfortaa/300.css";
 
 // styles
 const pageStyles = {
@@ -35,6 +35,9 @@ const IndexPage = () => {
         </LeftPanel>
         <RightPanel>
           <Section>
+            <h1>Soon! Up to 10 people, indoors...</h1>
+          </Section>
+          <Section>
             <Box>{pluralize(timeLeft.days, "day")}</Box>
             <Box>{pluralize(timeLeft.hours, "hour")}</Box>
             <Box>{pluralize(timeLeft.minutes, "minute")}</Box>
@@ -58,16 +61,12 @@ const RightHeader = styled.div`
   color: white;
 `;
 const LeftPanel = styled.div`
-  flex-direction: column;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin: 50% 0;
   width: 50%;
   padding: 0 5%;
   background-color: white;
   color: black;
-  height: 100%;
-  font-family: "Open Sans";
+  font-family: "comfortaa";
 `;
 const RightPanel = styled.div`
   width: 50%;
@@ -75,8 +74,11 @@ const RightPanel = styled.div`
   background-color: #44af7b;
   color: white;
   height: 100%;
-  font-family: "Open Sans";
+  font-family: "comfortaa";
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 const Section = styled.div`
   display: flex;
@@ -101,7 +103,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     height: 100%;
     margin: 0; padding: 0;
-    font-family: "Open Sans";
+    font-family: "comfortaa";
     overflow: hidden;
   }
 `;
