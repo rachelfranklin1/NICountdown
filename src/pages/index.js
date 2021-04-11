@@ -11,44 +11,51 @@ const pageStyles = {
   height: "100vh",
 };
 
-// markup
 const IndexPage = () => {
   const timeLeft = useCountdown();
   return (
     <>
       <GlobalStyle />
-      {/* <div
+      <div
         style={{
           display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
         }}
       >
-        <LeftHeader>Countdown to</LeftHeader>
-        <RightHeader>the sesh</RightHeader>
-      </div> */}
+        <LeftHeader>
+          <Heading color={"#44af7b"}>Countdown to</Heading>
+        </LeftHeader>
+        <RightHeader>
+          <Heading color={"white"}>social events</Heading>
+        </RightHeader>
+      </div>
       <main style={pageStyles}>
-        <title>Countdown to the sesh</title>
+        <title>Countdown to the social events</title>
         <LeftPanel>
-          <h1>You can now meet up to 6 people from two households</h1>
+          <h1>You can now meet up to 6 people outdoors, from two households</h1>
         </LeftPanel>
         <RightPanel>
-          <Box>{pluralize(timeLeft.days, "day")}</Box>
-          <Box>{pluralize(timeLeft.hours, "hour")}</Box>
-          <Box>{pluralize(timeLeft.minutes, "minute")}</Box>
-          <Box>{pluralize(timeLeft.seconds, "second")}</Box>
+          <Section>
+            <Box>{pluralize(timeLeft.days, "day")}</Box>
+            <Box>{pluralize(timeLeft.hours, "hour")}</Box>
+            <Box>{pluralize(timeLeft.minutes, "minute")}</Box>
+            <Box>{pluralize(timeLeft.seconds, "second")}</Box>
+          </Section>
         </RightPanel>
       </main>
     </>
   );
 };
-const LeftHeader = styled.header`
-  width: 100%;
+const LeftHeader = styled.div`
+  width: 50%;
   height: 50px;
+  display: flex;
+  justify-content: flex-end;
 `;
-const RightHeader = styled.header`
-  width: 100%;
+const RightHeader = styled.div`
+  width: 50%;
   height: 50px;
+  background-color: #44af7b;
+  color: white;
 `;
 const LeftPanel = styled.div`
   flex-direction: column;
@@ -65,13 +72,16 @@ const LeftPanel = styled.div`
 const RightPanel = styled.div`
   width: 50%;
   padding: 0 5%;
-  background-color: black;
+  background-color: #44af7b;
   color: white;
   height: 100%;
+  font-family: "Open Sans";
+  display: flex;
+`;
+const Section = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "Open Sans";
 `;
 
 const Box = styled.div`
@@ -80,10 +90,19 @@ const Box = styled.div`
   padding: 5%;
 `;
 
+const Heading = styled.h1`
+  font-size: 1.5rem;
+  padding: 0 10px;
+  height: 100%;
+  text-decoration: underline ${(props) => props.color};
+`;
+
 const GlobalStyle = createGlobalStyle`
   body {
     height: 100%;
     margin: 0; padding: 0;
+    font-family: "Open Sans";
+    overflow: hidden;
   }
 `;
 export default IndexPage;
