@@ -30,17 +30,13 @@ const IndexPage = () => {
       <main style={pageStyles}>
         <title>Countdown to the sesh</title>
         <LeftPanel>
-          <h1>Currently you can meet up to 6 people from two households</h1>
+          <h1>You can now meet up to 6 people from two households</h1>
         </LeftPanel>
         <RightPanel>
-          <span style={{ display: "flex" }}>
-            <h1>{timeLeft.days} days</h1>
-            <h1>{timeLeft.hours} hours</h1>
-          </span>
-          <span>
-            <h1>{timeLeft.minutes} minutes</h1>
-            <h1>{timeLeft.seconds} seconds</h1>
-          </span>
+          <Box>{pluralize(timeLeft.days, "day")}</Box>
+          <Box>{pluralize(timeLeft.hours, "hour")}</Box>
+          <Box>{pluralize(timeLeft.minutes, "minute")}</Box>
+          <Box>{pluralize(timeLeft.seconds, "second")}</Box>
         </RightPanel>
       </main>
     </>
@@ -75,8 +71,13 @@ const RightPanel = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
   font-family: "Open Sans";
+`;
+
+const Box = styled.div`
+  width: 25%;
+  font-size: 2em;
+  padding: 5%;
 `;
 
 const GlobalStyle = createGlobalStyle`
@@ -86,3 +87,10 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 export default IndexPage;
+
+function pluralize(number, unit) {
+  if (number > 1) {
+    return `${number} ${unit}s`;
+  }
+  return `${number} ${unit}`;
+}
