@@ -2,6 +2,7 @@ import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { useCountdown } from "../hooks/useCountdown";
 import "@fontsource/comfortaa/300.css";
+import { CountdownIcon } from "../images/countdown-icon";
 
 // styles
 const pageStyles = {
@@ -22,6 +23,7 @@ const IndexPage = () => {
         }}
       >
         <LeftHeader>
+          <CountdownIcon />
           <Heading color={"#44af7b"}>Countdown to</Heading>
         </LeftHeader>
         <RightHeader>
@@ -52,7 +54,7 @@ const LeftHeader = styled.div`
   width: 50%;
   height: 50px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
 `;
 const RightHeader = styled.div`
   width: 50%;
