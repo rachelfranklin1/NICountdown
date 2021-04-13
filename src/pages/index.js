@@ -3,6 +3,8 @@ import styled, { createGlobalStyle } from "styled-components";
 import { useCountdown } from "../hooks/useCountdown";
 import "@fontsource/comfortaa/300.css";
 import { CountdownIcon } from "../images/countdown-icon";
+import { Carousel } from "react-responsive-carousel";
+import styles from "react-responsive-carousel/lib/styles/carousel.min.css";
 
 // styles
 const pageStyles = {
@@ -13,43 +15,18 @@ const pageStyles = {
 };
 
 const IndexPage = () => {
-  const timeLeft = useCountdown();
   return (
-    <>
-      <GlobalStyle />
-      <div
-        style={{
-          display: "flex",
-        }}
-      >
-        <LeftHeader>
-          <CountdownIcon />
-          <Heading color={"#44af7b"}>Countdown to</Heading>
-        </LeftHeader>
-        <RightHeader>
-          <Heading color={"white"}>social events</Heading>
-        </RightHeader>
-      </div>
-      <main style={pageStyles}>
-        <title>Countdown to the social events</title>
-        <LeftPanel>
-          <h1>You can now meet up to 6 people outdoors, from two households</h1>
-        </LeftPanel>
-        <RightPanel>
-          <Section>
-            <h1>Soon! Up to 10 people, indoors...</h1>
-          </Section>
-          <Section>
-            <Box>{pluralize(timeLeft.days, "day")}</Box>
-            <Box>{pluralize(timeLeft.hours, "hour")}</Box>
-            <Box>{pluralize(timeLeft.minutes, "minute")}</Box>
-            <Box>{pluralize(timeLeft.seconds, "second")}</Box>
-          </Section>
-        </RightPanel>
-      </main>
-    </>
+    <Carousel showStatus={false}>
+      <Page />
+      <Page />
+    </Carousel>
   );
 };
+
+const Box = styled.div`
+  display: ${(props) => (props.display ? props.display : "flex")};
+`;
+
 const LeftHeader = styled.div`
   width: 50%;
   height: 50px;
@@ -88,7 +65,7 @@ const Section = styled.div`
   justify-content: center;
 `;
 
-const Box = styled.div`
+const Time = styled.div`
   width: 25%;
   font-size: 2em;
   padding: 5%;
@@ -116,4 +93,38 @@ function pluralize(number, unit) {
     return `${number} ${unit}s`;
   }
   return `${number} ${unit}`;
+}
+
+function Page() {
+  const timeLeft = useCountdown();
+  return (
+    <>
+      <Box>
+        <LeftHeader>
+          <CountdownIcon />
+          <Heading color={"#44af7b"}>Countdown to</Heading>
+        </LeftHeader>
+        <RightHeader>
+          <Heading color={"white"}>social events</Heading>
+        </RightHeader>
+      </Box>
+      <main style={pageStyles}>
+        <title>Countdown to the social events</title>
+        <LeftPanel>
+          <h1>You can now meet up to 6 people outdoors, from two households</h1>
+        </LeftPanel>
+        <RightPanel>
+          <Section>
+            <h1>Soon! Up to 10 people, indoors...</h1>
+          </Section>
+          <Section>
+            <Time>{pluralize(timeLeft.days, "day")}</Time>
+            <Time>{pluralize(timeLeft.hours, "hour")}</Time>
+            <Time>{pluralize(timeLeft.minutes, "minute")}</Time>
+            <Time>{pluralize(timeLeft.seconds, "second")}</Time>
+          </Section>
+        </RightPanel>
+      </main>
+    </>
+  );
 }
